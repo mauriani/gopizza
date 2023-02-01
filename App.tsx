@@ -7,7 +7,7 @@ import { GestureHandlerRootView } from "react-native-gesture-handler";
 
 import { AuthProvider } from "./src/hooks/auth";
 
-import { SignIn } from "./src/screens/SignIn";
+import { Product } from "./src/screens/Product";
 
 import theme from "./src/theme";
 
@@ -30,7 +30,7 @@ export default function App() {
 
       <AuthProvider>
         <GestureHandlerRootView style={{ flex: 1 }}>
-          <SignIn />
+          <Product />
         </GestureHandlerRootView>
       </AuthProvider>
     </ThemeProvider>
