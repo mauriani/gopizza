@@ -1,19 +1,67 @@
-import React from "react";
+import React, { useState } from "react";
+import { KeyboardAvoidingView, Platform } from "react-native";
+import { Button } from "../../components/Button";
 import { Input } from "../../components/Input";
 
-import { Container } from "./styles";
+import { useAuth } from "../../hooks/auth";
+
+import brandImg from "../../assets/brand.png";
+
+import {
+  Container,
+  Content,
+  Title,
+  Brand,
+  ForgotPasswordButton,
+  ForgotPasswordButtonLabel,
+} from "./styles";
 
 export function SignIn() {
+  const { signIn, isLoggin } = useAuth();
+
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  function handleSignIn() {
+    signIn(email, password);
+  }
   return (
     <Container>
-      <Input
-        type={"secondary"}
-        placeholder="E-mail"
-        autoCorrect={false}
-        autoCapitalize="none"
-      />
+      <KeyboardAvoidingView
+        behavior={Platform.OS === "ios" ? "padding" : undefined}
+      >
+        <Content>
+          <Brand source={brandImg} />
+          <Title>Login</Title>
+          <Input
+            type={"secondary"}
+            placeholder="E-mail"
+            autoCorrect={false}
+            autoCapitalize="none"
+            onChangeText={setEmail}
+          />
 
-      <Input type={"secondary"} placeholder="Senha" secureTextEntry />
+          <Input
+            type={"secondary"}
+            placeholder="Senha"
+            secureTextEntry
+            onChangeText={setPassword}
+          />
+
+          <ForgotPasswordButton onPress={() => console.log("teste")}>
+            <ForgotPasswordButtonLabel>
+              Esqueci minha senha
+            </ForgotPasswordButtonLabel>
+          </ForgotPasswordButton>
+
+          <Button
+            title="Entrar"
+            type="secondary"
+            isLoading={isLoggin}
+            onPress={() => handleSignIn()}
+          />
+        </Content>
+      </KeyboardAvoidingView>
     </Container>
   );
 }

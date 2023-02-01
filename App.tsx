@@ -3,7 +3,9 @@ import { ActivityIndicator, StatusBar } from "react-native";
 import { ThemeProvider } from "styled-components/native";
 import { useFonts, DMSans_400Regular } from "@expo-google-fonts/dm-sans";
 import { DMSerifDisplay_400Regular } from "@expo-google-fonts/dm-serif-display";
-import { Text } from "react-native";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
+
+import { AuthProvider } from "./src/hooks/auth";
 
 import { SignIn } from "./src/screens/SignIn";
 
@@ -25,7 +27,12 @@ export default function App() {
         backgroundColor="transparent"
         barStyle="light-content"
       />
-      <SignIn />
+
+      <AuthProvider>
+        <GestureHandlerRootView style={{ flex: 1 }}>
+          <SignIn />
+        </GestureHandlerRootView>
+      </AuthProvider>
     </ThemeProvider>
   );
 }
