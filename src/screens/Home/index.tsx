@@ -1,8 +1,9 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { Alert, TouchableOpacity, FlatList } from "react-native";
 import { useTheme } from "styled-components";
 import { MaterialIcons } from "@expo/vector-icons";
 import firestore from "@react-native-firebase/firestore";
+import { useNavigation, useFocusEffect } from "@react-navigation/native";
 
 import happyEmoji from "../../assets/happy.png";
 
@@ -15,6 +16,7 @@ import {
   MenuHeader,
   Title,
   MenuItemsNumber,
+  NewProductButton,
 } from "./styles";
 import { Search } from "../../components/Search";
 
@@ -22,6 +24,7 @@ import { ProductCard, ProductsProps } from "../../components/ProductCard";
 
 export function Home() {
   const { COLORS } = useTheme();
+  const navigation = useNavigation();
 
   const [pizzas, setPizzas] = useState<ProductsProps[]>([]);
   const [search, setSearch] = useState("");
@@ -59,9 +62,19 @@ export function Home() {
     fetchPizzas("");
   }
 
-  useEffect(() => {
-    fetchPizzas("");
-  }, []);
+  function handleOpen(id: string) {
+    navigation.navigate("product", { id });
+  }
+
+  function handleAdd() {
+    navigation.navigate("product", {});
+  }
+
+  useFocusEffect(
+    useCallback(() => {
+      fetchPizzas("");
+    }, [])
+  );
   return (
     <Container>
       <Header>
@@ -84,7 +97,7 @@ export function Home() {
 
       <MenuHeader>
         <Title>Cardápio</Title>
-        <MenuItemsNumber>10 pizzas</MenuItemsNumber>
+        <MenuItemsNumber>{pizzas.length} pizzas</MenuItemsNumber>
       </MenuHeader>
 
       <FlatList
@@ -96,7 +109,15 @@ export function Home() {
           paddingBottom: 125,
           marginHorizontal: 24,
         }}
-        renderItem={({ item }) => <ProductCard data={item} />}
+        renderItem={({ item }) => (
+          <ProductCard data={item} onPress={() => handleOpen(item.id)} />
+        )}
+      />
+
+      <NewProductButton
+        title="Cadastrar Pizza"
+        type="secondary"
+        onPress={handleAdd}
       />
     </Container>
   );

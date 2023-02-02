@@ -7,27 +7,16 @@ import { useAuth } from "../../hooks/auth";
 
 import brandImg from "../../assets/brand.png";
 
-import {
-  Container,
-  Content,
-  Title,
-  Brand,
-  ForgotPasswordButton,
-  ForgotPasswordButtonLabel,
-} from "./styles";
+import { Container, Content, Title, Brand } from "./styles";
+import { ButtonBack } from "../../components/ButtonBack";
 
-export function SignIn() {
-  const { signIn, isLoggin, forgotPassword } = useAuth();
+export function ForgotPassword() {
+  const { isLoggin, forgotPassword } = useAuth();
 
   const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-
-  function handleSignIn() {
-    signIn(email, password);
-  }
 
   function handleForgotPassword() {
-    //forgotPassword(email);
+    forgotPassword(email);
   }
   return (
     <Container>
@@ -35,8 +24,9 @@ export function SignIn() {
         behavior={Platform.OS === "ios" ? "padding" : undefined}
       >
         <Content>
+          <ButtonBack onPress={() => {}} />
           <Brand source={brandImg} />
-          <Title>Login</Title>
+          <Title>Esqueci minha senha</Title>
           <Input
             type={"secondary"}
             placeholder="E-mail"
@@ -45,24 +35,11 @@ export function SignIn() {
             onChangeText={setEmail}
           />
 
-          <Input
-            type={"secondary"}
-            placeholder="Senha"
-            secureTextEntry
-            onChangeText={setPassword}
-          />
-
-          <ForgotPasswordButton onPress={handleForgotPassword}>
-            <ForgotPasswordButtonLabel>
-              Esqueci minha senha
-            </ForgotPasswordButtonLabel>
-          </ForgotPasswordButton>
-
           <Button
             title="Entrar"
             type="secondary"
             isLoading={isLoggin}
-            onPress={() => handleSignIn()}
+            onPress={() => handleForgotPassword()}
           />
         </Content>
       </KeyboardAvoidingView>

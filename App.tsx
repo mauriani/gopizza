@@ -6,10 +6,9 @@ import { DMSerifDisplay_400Regular } from "@expo-google-fonts/dm-serif-display";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 
 import { AuthProvider } from "./src/hooks/auth";
-
-import { Home } from "./src/screens/Home";
-
 import theme from "./src/theme";
+import { Routes } from "./src/routes";
+import { Product } from "./src/screens/Product";
 
 export default function App() {
   const [fontsLoaded] = useFonts({
@@ -30,7 +29,7 @@ export default function App() {
 
       <AuthProvider>
         <GestureHandlerRootView style={{ flex: 1 }}>
-          <Home />
+          <Routes />
         </GestureHandlerRootView>
       </AuthProvider>
     </ThemeProvider>
