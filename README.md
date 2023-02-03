@@ -32,7 +32,7 @@ os pedidos no app, verificando e alterando o status do pedido. Além disso temos
 
 ```
 # Clonar esse repositório
-git clone <https://github.com/mauriani/gopizza.git>
+git clone https://github.com/mauriani/gopizza.git
 
 # Entrar na pasta dos arquivos do frontend
 cd gopizza
