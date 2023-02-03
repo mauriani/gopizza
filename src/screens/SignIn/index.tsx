@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { KeyboardAvoidingView, Platform } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 import { Button } from "../../components/Button";
 import { Input } from "../../components/Input";
 
@@ -17,7 +18,8 @@ import {
 } from "./styles";
 
 export function SignIn() {
-  const { signIn, isLoggin, forgotPassword } = useAuth();
+  const navigation = useNavigation();
+  const { signIn, isLoggin } = useAuth();
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -27,7 +29,7 @@ export function SignIn() {
   }
 
   function handleForgotPassword() {
-    //forgotPassword(email);
+    navigation.navigate("forgotPassword");
   }
   return (
     <Container>

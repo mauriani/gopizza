@@ -13,6 +13,7 @@ export declare global {
       product: ProductNavigationProps;
       order: OrderNavigationProps;
       orders: undefined;
+      forgotPassword: undefined;
     }
   }
 }

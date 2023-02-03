@@ -1,11 +1,15 @@
-import { useEffect, useState, useCallback } from "react";
+import { useState, useCallback } from "react";
 import { Alert, TouchableOpacity, FlatList } from "react-native";
 import { useTheme } from "styled-components";
 import { MaterialIcons } from "@expo/vector-icons";
 import firestore from "@react-native-firebase/firestore";
 import { useNavigation, useFocusEffect } from "@react-navigation/native";
 
+import { useAuth } from "../../hooks/auth";
+
 import happyEmoji from "../../assets/happy.png";
+import { Search } from "../../components/Search";
+import { ProductCard, ProductsProps } from "../../components/ProductCard";
 
 import {
   Container,
@@ -18,11 +22,9 @@ import {
   MenuItemsNumber,
   NewProductButton,
 } from "./styles";
-import { Search } from "../../components/Search";
-
-import { ProductCard, ProductsProps } from "../../components/ProductCard";
 
 export function Home() {
+  const { signOut, user } = useAuth();
   const { COLORS } = useTheme();
   const navigation = useNavigation();
 
@@ -63,7 +65,8 @@ export function Home() {
   }
 
   function handleOpen(id: string) {
-    navigation.navigate("product", { id });
+    const route = user?.isAdmin ? "product" : "order";
+    navigation.navigate(route, { id });
   }
 
   function handleAdd() {
@@ -80,10 +83,12 @@ export function Home() {
       <Header>
         <Greeting>
           <GreetinEmoji source={happyEmoji} />
-          <GreetinText>Olá, Admin</GreetinText>
+          <GreetinText>
+            {!user?.isAdmin ? "Olá, Garçom" : "Olá, Admin"}
+          </GreetinText>
         </Greeting>
 
-        <TouchableOpacity>
+        <TouchableOpacity onPress={signOut}>
           <MaterialIcons name="logout" color={COLORS.TITLE} size={24} />
         </TouchableOpacity>
       </Header>
@@ -114,11 +119,13 @@ export function Home() {
         )}
       />
 
-      <NewProductButton
-        title="Cadastrar Pizza"
-        type="secondary"
-        onPress={handleAdd}
-      />
+      {user?.isAdmin && (
+        <NewProductButton
+          title="Cadastrar Pizza"
+          type="secondary"
+          onPress={handleAdd}
+        />
+      )}
     </Container>
   );
 }

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { KeyboardAvoidingView, Platform } from "react-native";
+
 import { Button } from "../../components/Button";
 import { Input } from "../../components/Input";
 
@@ -26,7 +27,7 @@ export function ForgotPassword() {
         <Content>
           <ButtonBack onPress={() => {}} />
           <Brand source={brandImg} />
-          <Title>Esqueci minha senha</Title>
+          <Title>Esqueceu sua senha ?</Title>
           <Input
             type={"secondary"}
             placeholder="E-mail"
@@ -36,7 +37,7 @@ export function ForgotPassword() {
           />
 
           <Button
-            title="Entrar"
+            title="Enviar"
             type="secondary"
             isLoading={isLoggin}
             onPress={() => handleForgotPassword()}
