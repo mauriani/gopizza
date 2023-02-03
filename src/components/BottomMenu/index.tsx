@@ -8,6 +8,7 @@ type Props = {
 
 export function BottomMenu({ title, color, notifications }: Props) {
   const noNotifications = notifications === "0";
+
   return (
     <Container>
       <Title color={color}>{title}</Title>

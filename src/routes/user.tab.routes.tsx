@@ -40,7 +40,7 @@ export function UserTabRoutes() {
         component={Orders}
         options={{
           tabBarIcon: ({ color }) => (
-            <BottomMenu title="Pedidos" color={color} notifications="0" />
+            <BottomMenu title="Pedidos" color={color} notifications={"5"} />
           ),
         }}
       />
