@@ -3,5 +3,5 @@ Go Pizza
 </h3>
 
 <div align="center">
-<img title="Splash" src="https://user-images.githubusercontent.com/32397288/215569144-b9dfe941-86f7-4453-9e33-d4628bccb5f0.PNG" />
+<img title="Splash" src="https://user-images.githubusercontent.com/32397288/216655685-4e2b0798-af26-4465-b4c3-4f30ae12ea7a.png" />
 </div>
