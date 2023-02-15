@@ -47,7 +47,7 @@ export function Orders() {
     return () => subscribe();
   }, []);
 
-  console.log(orders);
+ 
   return (
     <Container>
       <Header>
