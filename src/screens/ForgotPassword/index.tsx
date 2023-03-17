@@ -30,7 +30,7 @@ export function ForgotPassword() {
           <Title>Esqueceu sua senha ?</Title>
           <Input
             type={"secondary"}
-            placeholder="E-mail"
+            placeholder="E-mailll"
             autoCorrect={false}
             autoCapitalize="none"
             onChangeText={setEmail}
